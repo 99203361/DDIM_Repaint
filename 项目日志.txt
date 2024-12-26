@@ -4,7 +4,7 @@
 如何训练模型已经有了一定的进展
 在通过guided-diffusion项目中的自述中，获得了如何训练模型
 对于参数调整请看txt文件
-参数调整文件为image_train.py和classifier_train.py和script_util.py
+参数调整文件为image_train.py、classifier_train.py和script_util.py
 
 由于DDIM只是在修改采样过程所以训练过程的内容依旧可以使用DDPM的训练过程
 
@@ -14,4 +14,5 @@
 如果要生成高质量图片需要先训练image后训练classifier
 对于相关代码方向要看下对应项目论文
 
+数据集方面可以使用Repaint项目中的数据集：ImageNet (inet256)、CelebA-HQ (c256) 和 Places2 (p256)
 
