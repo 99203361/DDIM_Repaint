@@ -1,0 +1,100 @@
+MODEL_FLAGS="
+--image_size 64 
+--num_channels 128
+--num_res_blocks 3"
+
+DIFFUSION_FLAGS="
+--diffusion_steps 4000 
+--noise_schedule linear"
+
+TRAIN_FLAGS="
+--lr 1e-4 
+--batch_size 128"
+
+训练所使用的代码
+TRAIN_FLAGS="
+--iterations 300000
+ --anneal_lr True 
+--batch_size 256 
+--lr 3e-4 
+--save_interval 10000 
+--weight_decay 0.05"
+
+CLASSIFIER_FLAGS="
+--image_size 128 
+--classifier_attention_resolutions 32,16,8 
+--classifier_depth 2 
+--classifier_width 128 
+--classifier_pool attention 
+--classifier_resblock_updown True 
+--classifier_use_scale_shift_norm True"
+
+
+采样使用的代码
+MODEL_FLAGS="
+--attention_resolutions 32,16,8 
+--class_cond True 
+--image_size 128 
+--learn_sigma True 
+--num_channels 256 
+--num_heads 4 
+--num_res_blocks 2
+ --resblock_updown True 
+--use_fp16 True 
+--use_scale_shift_norm True"
+
+CLASSIFIER_FLAGS="
+--image_size 128 
+--classifier_attention_resolutions 32,16,8 
+--classifier_depth 2 
+--classifier_width 128 
+--classifier_pool attention 
+--classifier_resblock_updown True 
+--classifier_use_scale_shift_norm True 
+--classifier_scale 1.0 
+--classifier_use_fp16 True"
+
+SAMPLE_FLAGS="
+--batch_size 4 
+--num_samples 50000 
+--timestep_respacing ddim25
+ --use_ddim True"
+
+mpiexec -n N python scripts/classifier_sample.py \
+    --model_path /path/to/model.pt \
+    --classifier_path path/to/classifier.pt \
+    $MODEL_FLAGS $CLASSIFIER_FLAGS $SAMPLE_FLAGS
+
+定义模型标志（MODEL_FLAGS）：
+--attention_resolutions 32,16,8：设置注意力机制的分辨率。
+--class_cond True：启用类别条件化，意味着模型的输出将依赖于类别标签。
+-image_size 128：设置输入图像的大小为 128x128。
+-learn_sigma True：允许模型学习噪声水平（sigma）。
+-num_channels 256：设置网络中的通道数为 256。
+-num_heads 4：设置多头注意力中的头数为 4。
+-num_res_blocks 2：设置残差块的数量为 2。
+--resblock_updown True：可能指的是在残差块中使用上采样或下采样。
+--use_fp16 True：使用 16 位浮点数进行计算，这可以减少内存使用并可能加速计算。
+--use_scale_shift_norm True：使用缩放和移位规范化。
+定义分类器标志（CLASSIFIER_FLAGS）：
+--image_size 128：同样设置输入图像的大小为 128x128。
+--classifier_attention_resolutions 32,16,8：为分类器设置注意力机制的分辨率。
+--classifier_depth 2：设置分类器的深度为 2。
+--classifier_width 128：设置分类器的宽度为 128。
+--classifier_resblock_updown True：在分类器中使用残差块进行上采样或下采样。
+--classifier_use_scale_shift_norm True：在分类器中使用缩放和移位规范化。
+--classifier_scale 1.0：设置分类器的缩放因子为 1.0。
+--classifier_use_fp16 True：在分类器中使用 16 位浮点数进行计算。
+定义采样标志（SAMPLE_FLAGS）：
+--batch_size 4：设置批处理大小为 4。
+--num_samples 50000：设置要生成的样本数量为 50,000。
+--timestep_respacing ddim25：设置时间步长间隔。
+--use_ddim True：启用 DDPM（去噪扩散模型）。
+执行命令：
+
+mpiexec -n N：使用 MPI（消息传递接口）执行 Python 脚本，N 是要运行的进程数。
+python scripts/classifier_sample.py：要执行的 Python 脚本。
+--model_path /path/to/model.pt：指定模型文件的路径。
+--classifier_path path/to/classifier.pt：指定分类器文件的路径。
+$MODEL_FLAGS $CLASSIFIER_FLAGS $SAMPLE_FLAGS：将之前定义的所有标志作为参数传递给 Python 脚本。
+这段代码是一个典型的用于分布式执行深度学习训练或推理任务的命令行脚本，它使用 MPI 来并行化任务，并传递一系列配置参数给 Python 脚本。
