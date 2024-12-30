@@ -3,7 +3,7 @@
 
 如何训练模型已经有了一定的进展
 在通过guided-diffusion项目中的自述中，获得了如何训练模型
-对于参数调整请看txt文件
+对于参数调整请看文件:训练用超参数.txt
 参数调整文件为image_train.py、classifier_train.py和script_util.py
 
 由于DDIM只是在修改采样过程所以训练过程的内容依旧可以使用DDPM的训练过程
