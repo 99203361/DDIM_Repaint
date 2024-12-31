@@ -16,3 +16,15 @@
 
 数据集方面可以使用Repaint项目中的数据集：ImageNet (inet256)、CelebA-HQ (c256) 和 Places2 (p256)
 
+2024/12/27
+模型和技术框架确定？
+数据集的确定与下载
+参数的调整
+image_train.py和classifier_train.py的代码查看
+MPI并行训练
+
+2024/12/31
+训练参数调整完毕
+处理数据集将其存放在指定地址
+但是git项目中给出的处理方法适用于Unix环境
+如何解压处理数据集
