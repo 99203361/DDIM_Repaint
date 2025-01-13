@@ -30,8 +30,8 @@ image_train.py和classifier_train.py的代码查看
 此次使用的数据集为ImageNet (inet256)，数据集解压完成并存放在了指定位置
 环境重新适配了mpi4py，安装教程可以借鉴CSDN文章：windows安装MPI及python安装mpi4py
 运行时出现了新的问题，RuntimeError: No rendezvous handler for env://
-初步判断为环境汇总torch版本过低的问题，需要升级至1.8以上
-但是这是否会导致Repaint原环境的崩溃？
+初步判断为环境汇总torch版本过低的问题，需要升级至1.8以上，但是这是否会导致Repaint原环境的崩溃？
+需要找几篇baseline，进行结果对比。
 
 2025/1/9
 解决了准备训练时的问题：
