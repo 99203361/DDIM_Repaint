@@ -80,7 +80,7 @@ def sync_params(params):
     """
     for p in params:
         with th.no_grad():
-            dist.broadcast(p, 0)
+            dist.broadcast(p.clone(), 0)
 
 
 def _find_free_port():
