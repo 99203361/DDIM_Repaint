@@ -202,8 +202,8 @@ def split_microbatches(microbatch, *args):
 
 def create_argparser():
     defaults = dict(
-        data_dir="",
-        val_data_dir="",
+        data_dir="对应训练数据集位置",
+        val_data_dir="对应val数据集位置",
         noised=True,
         iterations=150000,
         lr=3e-4,
